@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scnet"
+version = "0.1.0"
+description = "SCNet: Sparse Compression Network for Music Source Separation"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "accelerate==0.32.1",
+  "einops==0.6.1",
+  "julius==0.2.7",
+  "ml_collections==0.1.1",
+  "numpy",
+  "PyYAML",
+  "soundfile==0.12.1",
+  "torch==2.8.0",
+  "torchaudio==2.8.0",
+  "tqdm",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["scnet"]
