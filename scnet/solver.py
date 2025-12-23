@@ -7,20 +7,19 @@ from . import augment
 from .loss import spec_rmse_loss
 from tqdm import tqdm
 from .log import logger
-from accelerate import Accelerator
 
 def _summary(metrics):
     return " | ".join(f"{key.capitalize()}={val}" for key, val in metrics.items())
 
 class Solver(object):
-    def __init__(self, loaders, model, optimizer, config, args):
+    def __init__(self, loaders, model, optimizer, config, args, accelerator):
         self.config = config
         self.loaders = loaders
 
         self.model = model
         self.optimizer = optimizer
         self.device = next(iter(self.model.parameters())).device
-        self.accelerator = Accelerator()
+        self.accelerator = accelerator
 
         self.stft_config = {
             'n_fft': config.model.nfft,
