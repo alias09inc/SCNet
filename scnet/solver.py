@@ -18,7 +18,7 @@ class Solver(object):
 
         self.model = model
         self.optimizer = optimizer
-        self.device = next(iter(self.model.parameters())).device
+        self.device = self.accelerator.device
         self.accelerator = accelerator
 
         self.stft_config = {
@@ -194,7 +194,6 @@ class Solver(object):
             data_loader = tqdm(data_loader)
 
         for idx, sources in enumerate(data_loader):
-            sources = sources.to(self.device)
             if train:
                 sources = self.augment(sources)
                 mix = sources.sum(dim=1)

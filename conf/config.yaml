@@ -1,4 +1,3 @@
-
 data:
   wav: /raid_zoe/home/lr/kent/dataset/
   samplerate: 44100
@@ -7,14 +6,14 @@ data:
   channels: 2
   normalize: true
   metadata: ./metadata
-  sources: ['drums', 'bass', 'other', 'vocals']
+  sources: ["drums", "bass", "other", "vocals"]
 
 ema:
   epoch: [0.9, 0.95]
   batch: [0.9995, 0.9999]
 
 model:
-  sources: ['drums', 'bass', 'other', 'vocals']
+  sources: ["drums", "bass", "other", "vocals"]
   audio_channels: 2
   # Main structure
   dims: [4, 32, 64, 128]
@@ -24,19 +23,19 @@ model:
   win_size: 4096
   normalized: True
   # SD/SU layer
-  band_SR: [0.175, 0.392, 0.433]     
-  band_stride: [1, 4, 16]             
-  band_kernel: [3, 4, 16]                  
+  band_SR: [0.175, 0.392, 0.433]
+  band_stride: [1, 4, 16]
+  band_kernel: [3, 4, 16]
   # Convolution Module
-  conv_depths: [3,2,1]
-  compress: 4 
+  conv_depths: [3, 2, 1]
+  compress: 4
   conv_kernel: 3
   # Dual-path RNN
   num_dplayer: 6
   expand: 1
 
-epochs: 200
-batch_size: 4
+epochs: 100
+batch_size: 8
 
 optim:
   lr: 0.0005
@@ -63,17 +62,3 @@ augment:
 
 misc:
   num_workers: 10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
