@@ -173,7 +173,7 @@ def get_wav_datasets(args):
     sig = hashlib.sha1(str(args.wav).encode()).hexdigest()[:8]
     metadata_file = Path(args.metadata) / ('wav_' + sig + ".json")
     train_path = Path(args.wav) / "train"
-    valid_path = Path(args.wav) / "valid"
+    valid_path = Path(args.wav) / "test"
     if not metadata_file.is_file() and accelerator.is_main_process:
         metadata_file.parent.mkdir(exist_ok=True, parents=True)
         train = build_metadata(train_path, args.sources)
@@ -192,6 +192,5 @@ def get_wav_datasets(args):
                        samplerate=args.samplerate, channels=args.channels,
                        normalize=args.normalize, **kw_cv)
     return train_set, valid_set
-
 
 
