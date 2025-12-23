@@ -18,8 +18,8 @@ class Solver(object):
 
         self.model = model
         self.optimizer = optimizer
-        self.device = self.accelerator.device
         self.accelerator = accelerator
+        self.device = self.accelerator.device
 
         self.stft_config = {
             'n_fft': config.model.nfft,
