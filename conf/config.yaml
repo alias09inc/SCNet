@@ -61,4 +61,4 @@ augment:
   flip: true
 
 misc:
-  num_workers: 10
+  num_workers: 16
