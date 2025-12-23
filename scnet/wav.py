@@ -14,6 +14,7 @@ import torchaudio as ta
 from torch.nn import functional as F
 
 from .utils import convert_audio_channels
+from .log import logger
 from accelerate import Accelerator
 
 accelerator = Accelerator()
@@ -153,6 +154,9 @@ class Wavset:
             wavs = []
             for source in self.sources:
                 file = self.get_file(name, source)
+                if not file.exists():
+                    logger.error("Missing audio file: %s (track=%s, source=%s, index=%d)", file, name, source, index)
+                    raise FileNotFoundError(f"Missing audio file: {file}")
                 wav, _ = ta.load(str(file), frame_offset=offset, num_frames=num_frames)
                 wav = convert_audio_channels(wav, self.channels)
                 wavs.append(wav)
@@ -192,5 +196,4 @@ def get_wav_datasets(args):
                        samplerate=args.samplerate, channels=args.channels,
                        normalize=args.normalize, **kw_cv)
     return train_set, valid_set
-
 
